@@ -35,7 +35,7 @@ namespace WaterMango_Service
             {
                 option.AddPolicy(AllowLocalhost, builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000",  "https://localhost:3000").AllowAnyHeader();
+                    builder.WithOrigins("http://localhost:3000",  "https://localhost:3000").AllowAnyHeader().AllowAnyMethod();
                 });
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

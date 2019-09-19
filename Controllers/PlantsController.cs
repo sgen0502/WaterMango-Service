@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WaterMango_Service.Communication.DAO;
 using WaterMango_Service.Models;
+using WaterMango_Service.Services;
 
 namespace WaterMango_Service.Controllers
 {
@@ -14,45 +15,45 @@ namespace WaterMango_Service.Controllers
     [ApiController]
     public class PlantsController : ControllerBase
     {
-        private ICommunicationDao<PlantModel> _dao;
+        private PlantService _service;
         
         public PlantsController()
         {
-            _dao = DependencyContainer.GetExportedValue<ICommunicationDao<PlantModel>>();
+            _service = DependencyContainer.GetExportedValue<PlantService>();
         }
-        // GET api/values
+        
         [HttpGet]
         public ActionResult<IEnumerable<PlantModel>> Get()
         {
-            return _dao.FindAll();
+            return _service.GetAllPlants();
         }
 
-        // GET api/values/5
+        
         [HttpGet("{id}")]
         public ActionResult<PlantModel> Get(int id)
         {
-            return _dao.Find(id);
+            return _service.GetPlant(id);
         }
 
-        // POST api/values
+        
         [HttpPost]
         public void Post([FromBody] PlantModel value)
         {
-            _dao.Add(value);
+            _service.AddPlant(value);
         }
 
-        // PUT api/values/5
+        
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id)
         {
-            _dao.Update(_dao.Find(id));
+            _service.UpdatePlant(_service.GetPlant(id));
         }
 
-        // DELETE api/values/5
+        
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _dao.Delete(id);
+            _service.DeletePlant(id);
         }
     }
 }
