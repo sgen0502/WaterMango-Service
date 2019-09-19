@@ -20,6 +20,7 @@ namespace WaterMango_Service
 {
     public class Startup
     {
+        public const string AllowLocalhost = "localhost";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +31,13 @@ namespace WaterMango_Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(option =>
+            {
+                option.AddPolicy(AllowLocalhost, builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000",  "https://localhost:3000").AllowAnyHeader();
+                });
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //services.AddDbContext<PlantDbContext>(options => options.UseInMemoryDatabase(databaseName: "PlantDb"));
         }
@@ -54,6 +62,8 @@ namespace WaterMango_Service
                     Path.Combine(Directory.GetCurrentDirectory(), @"static")),
                 RequestPath = new PathString("/static")
             });
+
+            app.UseCors(AllowLocalhost);
 
             app.UseHttpsRedirection();
             app.UseMvc();

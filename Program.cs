@@ -22,16 +22,6 @@ namespace WaterMango_Service
             DependencyContainer.BuildDependency();
 
             var host = CreateWebHostBuilder(args).Build();
-
-            
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<PlantDbContext>();
-                
-                PlantDataGenerator.Initialize(services);
-            }
-            
             host.Run();
         }
 
