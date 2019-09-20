@@ -35,9 +35,9 @@ cd ..\WaterMango-Service
 dotnet restore
 dotnet run
 
-# 5. Open htpp://localhost:5001/static/index.html in browser
+# 5. Open https://localhost:5001/static/index.html in browser
 ```
-## Support
+## Known Issue
 If you get an error saying that certificate is not trusted, please execute cmd below.
 ```
 dotnet dev-certs https --trust 
