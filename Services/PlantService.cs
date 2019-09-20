@@ -5,8 +5,8 @@ using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using WaterMango_Service.Communication.DAO;
 using WaterMango_Service.Models;
-using WaterMango_Service.Services.Grpc;
-using WaterMangoService.Models.Proto;
+using WaterMango_Service.Models.Enum;
+using WaterMango_Service.Services.SignalR;
 
 namespace WaterMango_Service.Services
 {
@@ -16,28 +16,15 @@ namespace WaterMango_Service.Services
     {
         private ICommunicationDao<PlantModel> _dao;
         private ILogger _log;
-        private Server _server;
         private const int Port = 50000;
         
         [ImportingConstructor]
         public PlantService(ICommunicationDao<PlantModel> dao, ILoggerFactory factory)
         {
-            _dao = dao;
             _log = factory.CreateLogger<PlantService>();
-            
-            _server = new Server
-            {
-                Services = { PlantStatusUpdate.BindService(new PlantStatusGrpcService(_dao, factory)) },
-                Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
-            };
-            _server.Start();   
+            _dao = dao;
         }
 
-        public void StopGrpcServer()
-        {
-            _server.ShutdownAsync().Wait();
-        }
-        
         public PlantModel GetPlant(int id)
         {
             return _dao.Find(id);
@@ -57,6 +44,31 @@ namespace WaterMango_Service.Services
         {
             item.LastUpdate = DateTime.Now;
             _dao.Update(item);
+        }
+        
+        public void GiveWaterToPlant(PlantModel item)
+        {
+            //Defensive Code
+            if (item.Status == PlantStatus.WAITING)
+            {
+                throw new Exception("Wait Time.");        
+            }
+            else if (item.Status == PlantStatus.WATERING)
+            {
+                //When Watering Cancel current session and go rest
+                item.LastUpdate = DateTime.Now;
+                item.Status = PlantStatus.WAITING;
+                _dao.Update(item);
+            }
+            else
+            {
+                // Case when Alert or Open session
+                // Update all timestamp and move to Waterinmg Session
+                item.LastUpdate = DateTime.Now;
+                item.LastWaterSession = DateTime.Now;
+                item.Status = PlantStatus.WATERING;
+                _dao.Update(item);
+            }
         }
         
         public void DeletePlant(int id)

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using WaterMango_Service.Communication.DAO;
 using WaterMango_Service.Models;
 using WaterMango_Service.Services;
+using WaterMango_Service.Utils;
 
 namespace WaterMango_Service.Controllers
 {
@@ -44,12 +45,21 @@ namespace WaterMango_Service.Controllers
 
         
         [HttpPut("{id}")]
-        public void Put(int id)
+        public ActionResult<string> Put(int id)
         {
-            _service.UpdatePlant(_service.GetPlant(id));
+            try
+            {
+                _service.GiveWaterToPlant(_service.GetPlant(id));
+            }
+            catch
+            {
+                return Conflict("Currently Wait Time");
+            }
+
+            return Ok($"Start giving water for plant id =  {id}");
         }
 
-        
+
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

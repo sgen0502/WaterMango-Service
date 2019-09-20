@@ -7,47 +7,47 @@ using WaterMango_Service.Models;
 
 namespace WaterMango_Service.Communication.DAO
 {
-    [Export(typeof(ICommunicationDao<PlantModel>))]
+    [Export(typeof(ICommunicationDao<RuleModel>))]
     [Shared]
-    public class PlantInMemoryDataBaseDao : ICommunicationDao<PlantModel>
+    public class RuleInMemoryDataBaseDao : ICommunicationDao<RuleModel>
     {
-        private InMemoryDbContext<PlantModel> context;
+        private InMemoryDbContext<RuleModel> context;
         
         [ImportingConstructor]
-        public PlantInMemoryDataBaseDao(IInMemeoryDbGenerator<PlantModel> generator)
+        public RuleInMemoryDataBaseDao(IInMemeoryDbGenerator<RuleModel> generator)
         {
             context = generator.BuildDb();
         }
-        public PlantModel Find(int id)
+        public RuleModel Find(int id)
         {
             return context.Rows
                 .First(x => x.Id == id);
         }
 
-        public List<PlantModel> FindAll()
+        public List<RuleModel> FindAll()
         {
             return context.Rows.ToList();
         }
 
-        public void Add(PlantModel item)
+        public void Add(RuleModel item)
         {
             context.Rows.Add(item);
             context.SaveChanges();
         }
 
-        public void Add(List<PlantModel> items)
+        public void Add(List<RuleModel> items)
         {
             items.ForEach(i => context.Rows.Add(i));
             context.SaveChanges();
         }
 
-        public void Update(PlantModel item)
+        public void Update(RuleModel item)
         {
             context.Rows.Update(item);
             context.SaveChanges();
         }
         
-        public void Delete(PlantModel item)
+        public void Delete(RuleModel item)
         {
             context.Rows.Remove(item);
         }

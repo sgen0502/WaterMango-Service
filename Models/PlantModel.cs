@@ -1,4 +1,5 @@
 using System;
+using WaterMango_Service.Models.Enum;
 
 namespace WaterMango_Service.Models
 {
@@ -15,8 +16,9 @@ namespace WaterMango_Service.Models
 
         public int Id { get; set; }
         public string Name {get; set;}
+        
+        public DateTime LastWaterSession {get; set;}
         public DateTime LastUpdate {get; set;}
-        public bool IsResting {get; set;}
-        public bool IsAlert {get; set;}
+        public PlantStatus Status {get; set;}
     }
 }

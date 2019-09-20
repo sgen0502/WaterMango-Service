@@ -15,10 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Composition" Version="1.0.31" />
-  </ItemGroup>
-  
-  <ItemGroup>
-	<Protobuf Include="Models\Proto\PlantStatus.proto" GrpcServices="Server" />
+    <PackageReference Include="System.Reactive" Version="4.1.6" />
   </ItemGroup>
 
 
