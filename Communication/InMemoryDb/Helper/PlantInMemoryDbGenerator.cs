@@ -29,7 +29,7 @@ namespace WaterMango_Service.Communication.InMemoryDb.Helper
                 new PlantModel
                 {
                     Id = 1,
-                    Name = "Plant1",
+                    Name = "Plant 1",
                     LastUpdate = DateTime.Now,
                     LastWaterSession=DateTime.Now,
                     Status = PlantStatus.OPEN
@@ -37,7 +37,7 @@ namespace WaterMango_Service.Communication.InMemoryDb.Helper
                 new PlantModel
                 {
                     Id = 2,
-                    Name = "Plant2",
+                    Name = "Plant 2",
                     LastUpdate = DateTime.Now.Subtract(TimeSpan.FromMinutes(5)),
                     LastWaterSession = DateTime.Now.Subtract(TimeSpan.FromMinutes(5)),
                     Status = PlantStatus.OPEN
@@ -45,7 +45,7 @@ namespace WaterMango_Service.Communication.InMemoryDb.Helper
                 new PlantModel
                 {
                     Id = 3,
-                    Name = "Plant3",
+                    Name = "Plant 3",
                     LastUpdate = DateTime.Now.Subtract(TimeSpan.FromMinutes(10)),
                     LastWaterSession = DateTime.Now.Subtract(TimeSpan.FromMinutes(10)),
                     Status = PlantStatus.OPEN
@@ -53,7 +53,7 @@ namespace WaterMango_Service.Communication.InMemoryDb.Helper
                 new PlantModel
                 {
                     Id = 4,
-                    Name = "Plant4",
+                    Name = "Plant 4",
                     LastUpdate = DateTime.Now.Subtract(TimeSpan.FromMinutes(359)),
                     LastWaterSession = DateTime.Now.Subtract(TimeSpan.FromMinutes(359)),
                     Status = PlantStatus.OPEN
@@ -61,7 +61,7 @@ namespace WaterMango_Service.Communication.InMemoryDb.Helper
                 new PlantModel
                 {
                     Id = 5,
-                    Name = "Plant5",
+                    Name = "Plant 5",
                     LastUpdate = DateTime.Now.Subtract(TimeSpan.FromHours(6)),
                     LastWaterSession = DateTime.Now.Subtract(TimeSpan.FromHours(6)),
                     Status = PlantStatus.OPEN

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Composition;
-using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using WaterMango_Service.Communication.DAO;
 using WaterMango_Service.Models;
 using WaterMango_Service.Models.Enum;
-using WaterMango_Service.Services.SignalR;
 
 namespace WaterMango_Service.Services
 {

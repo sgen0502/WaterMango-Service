@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using WaterMango_Service.Models.Enum;
 
 namespace WaterMango_Service.Models
